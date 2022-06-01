@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 
-using System.Data;
-using System.IO;
-using System.Data.SqlClient;
 
 
 /*******************************************************************************************************************\
@@ -15,23 +9,23 @@ using System.Data.SqlClient;
 \*******************************************************************************************************************/
 namespace Model
 {
-    public class MainLib
+    public class outputHTML
     {
         public static void Main(string[] args)
-        {
-            damTest damTest = new damTest();
-            string file = @"\MainApp\MainApp\test.xlsx";
+        { 
+            DataTable dt = dataSample();
 
-            var dataSet = damTest.GetDataSetFromExcelFile(file);
+            string html = GetHtmlOutput(dt);
+            File.WriteAllText("mydzout.html", html);
 
-            damTest.ShowConsoleOutput(damTest.ConvertDataSetToDatatable(dataSet));
-
-            Console.WriteLine(string.Format("reading file: {0}", file));
-            Console.WriteLine(string.Format("coloums: {0}", dataSet.Tables[0].Columns.Count));
-            Console.WriteLine(string.Format("rows: {0}", dataSet.Tables[0].Rows.Count));
+            Console.WriteLine();
+            Console.WriteLine("Enter any key to exit !");
             Console.ReadKey();
+        }
 
 
+        public static DataTable dataSample()
+        {
             DataTable dt = new DataTable();
 
             dt.Columns.Add("First Name");
@@ -43,57 +37,8 @@ namespace Model
             dt.Rows.Add("Daniil", "Zlenko", "dzlenko0922@gmail.com", 18);
             dt.Rows.Add("Bogdan", "Cerbulescu", "someemail@fghj.hjj", 35);
 
-            //ShowConsoleOutput(dt);
-
-            string html = GetHtmlOutput(dt);
-            File.WriteAllText("mydzout.html", html);
-
-
-            Console.WriteLine();
-            Console.WriteLine("Enter any key to exit !");
-            Console.ReadKey();
+            return dt;
         }
-
-        public static void GetSomeOutput()
-        {
-            Console.WriteLine(")))");
-           
-        }
-
-
-
-
-
-
-        // SqlConnection connection = new SqlConnection(@"Data Source=LAPTOP-R94KE44G\SQLEXPRESS;Initial Catalog=USERSDRAFTS;Integrated Security=True");
-
-        // SqlDataAdapter adapter = new SqlDataAdapter();
-
-        // string sqlQuery = $"select * from dbo.someInfo";
-
-
-        // public void openConnection()
-        // {
-        //     if(connection.State == System.Data.ConnectionState.Closed)
-        //     {
-        //         connection.Open();
-        //     }
-        // }
-
-        // public void closeConnection()
-        // {
-        //     if(connection.State == System.Data.ConnectionState.Open)
-        //     {
-        //         connection.Close();
-        //     }
-        // }
-
-        // public SqlConnection getConnection()
-        // {
-        //     return connection;
-        // }
-
-
 
 
 
@@ -104,25 +49,7 @@ namespace Model
         \*******************************************************************************************************************/
 
 
-        static void ShowConsoleOutput(DataTable dt)
-        {
-
-            foreach (DataColumn col in dt.Columns)
-                Console.Write("{0} ", col.ColumnName);
-
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Console.WriteLine();
-                foreach (DataColumn col in dt.Columns)
-                    Console.Write("{0} ", row[col.ColumnName]);
-            }
-            Console.WriteLine();
-
-        }
-
-
-        static string GetHtmlOutput(DataTable dt)
+        public static string GetHtmlOutput(DataTable dt)
         {
             string html =
 
@@ -203,6 +130,8 @@ namespace Model
 
 
             html += "</table> </body></html>";
+
+            File.WriteAllText("mydzout.html", html);
 
             return html;
         }

@@ -1,19 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Data;
 using System.Data.OleDb;
 
 namespace Model
 {
 
-
-
-    public class damTest
+    public class excelData
     {
-   
+        
+        public string Path = @"\MainApp\MainApp\test.xlsx";
+        public string path
+        {
+            get { return Path; }
+            set { Path = value; }
+        }
+        public static void Main(string[] args)
+        {
+            string file = @"\MainApp\MainApp\test.xlsx";
+
+            var dataSet = GetDataSetFromExcelFile(file);
+
+        }
+        public static DataSet excelData_(string path)
+        {
+            var ds = GetDataSetFromExcelFile(path);
+            return ds;
+        }
 
         private static string GetConnectionString(string file)
         {
@@ -51,30 +63,8 @@ namespace Model
             return sb.ToString();
         }
 
-        public static void ShowConsoleOutput(DataTable dt)
-        {
 
-            foreach (DataColumn col in dt.Columns)
-                Console.Write("{0} ", col.ColumnName);
-
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Console.WriteLine();
-                foreach (DataColumn col in dt.Columns)
-                    Console.Write("{0} ", row[col.ColumnName]);
-            }
-            Console.WriteLine();
-
-        }
-
-        public static DataTable ConvertDataSetToDatatable(DataSet ds)
-        {
-
-
-            DataTable FirstDT = ds.Tables[0];
-            return FirstDT;
-        }
+        
 
         public static DataSet GetDataSetFromExcelFile(string file)
         {
@@ -113,7 +103,6 @@ namespace Model
 
                     ds.Tables.Add(dt);
 
-                    Console.WriteLine("YTYRUIVTRRRY");
 
 
                 }

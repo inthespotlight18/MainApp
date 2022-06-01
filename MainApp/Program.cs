@@ -22,10 +22,25 @@ namespace MainApp
        
         static void Main(string[] args)
         {
-            Model.MainLib mainLib = new Model.MainLib();
-            Model.damTest damTest = new Model.damTest();
+            Model.outputHTML mainLib = new Model.outputHTML();
+            Model.excelData excelData = new Model.excelData();
+            Model.Technical Technical = new Model.Technical();
+            Model.sqlData sqlData = new Model.sqlData();
 
-            Model.MainLib.GetSomeOutput();
+            sqlData.Main(null);
+
+            string p = excelData.path;
+
+            DataSet? dataSet_ExcelData = excelData.GetDataSetFromExcelFile(p);
+            DataTable? dataTable_ExcelData = Technical.ConvertDataSetToDatatable(dataSet_ExcelData);
+
+            //Technical.ShowConsoleOutput(dataTable_ExcelData);
+
+            //dataSample = outputHTML.dataSample();
+            //outputHTML.GetHtmlOutput(dataSample);
+
+
+            outputHTML.GetHtmlOutput(dataTable_ExcelData);
 
             Console.WriteLine();
 
