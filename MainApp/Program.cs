@@ -27,20 +27,26 @@ namespace MainApp
             Model.Technical Technical = new Model.Technical();
             Model.sqlData sqlData = new Model.sqlData();
 
-            sqlData.Main(null);
-
             string p = excelData.path;
 
             DataSet? dataSet_ExcelData = excelData.GetDataSetFromExcelFile(p);
             DataTable? dataTable_ExcelData = Technical.ConvertDataSetToDatatable(dataSet_ExcelData);
 
-            //Technical.ShowConsoleOutput(dataTable_ExcelData);
-
             //dataSample = outputHTML.dataSample();
-            //outputHTML.GetHtmlOutput(dataSample);
 
 
-            outputHTML.GetHtmlOutput(dataTable_ExcelData);
+
+/*******************************************************************************************************************\
+
+*           Functions below get data from different sources and turn it in HTML code   (3 ways)                     *
+*                   Uncomment commands below. You may have to change your SqlConnectionString for using sqlData     *
+
+\*******************************************************************************************************************/
+
+            //outputHTML.GetHtmlOutput(dataSample);              //  - manual
+            //outputHTML.GetHtmlOutput(dataTable_ExcelData);    //  - excel
+            //outputHTML.GetHtmlOutput(sqlData.GetSqlDT());    // - SqlServer
+
 
             Console.WriteLine();
 
