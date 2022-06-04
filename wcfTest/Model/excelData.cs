@@ -4,29 +4,8 @@ using System.Data.OleDb;
 
 namespace Model
 {
-
     public class excelData
     {
-        
-        public string Path = @"\MainApp\MainApp\test.xlsx";
-        public string path
-        {
-            get { return Path; }
-            set { Path = value; }
-        }
-        public static void Main(string[] args)
-        {
-            string file = @"\MainApp\MainApp\test.xlsx";
-
-            var dataSet = GetDataSetFromExcelFile(file);
-
-        }
-        public static DataSet excelData_(string path)
-        {
-            var ds = GetDataSetFromExcelFile(path);
-            return ds;
-        }
-
         private static string GetConnectionString(string file)
         {
             Dictionary<string, string> props = new Dictionary<string, string>();
@@ -62,16 +41,12 @@ namespace Model
 
             return sb.ToString();
         }
-
-
-        
-
-        public static DataSet GetDataSetFromExcelFile(string file)
+ 
+        public static DataTable ExcelSheetGetDt(string file)
         {
             DataSet ds = new DataSet();
 
             string? connectionString = GetConnectionString(file);
-
 
             using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
@@ -82,11 +57,9 @@ namespace Model
                 // Get all Sheets in Excel File
                 DataTable? dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
-
                 // Loop through all Sheets to get data
                 foreach (DataRow dr in dtSheet.Rows)
                 {
-
                     string sheetName = dr["TABLE_NAME"].ToString();
 
                     if (!sheetName.EndsWith("$"))
@@ -103,24 +76,14 @@ namespace Model
 
                     ds.Tables.Add(dt);
 
-
-
                 }
-
                 cmd = null;
                 conn.Close();
             }
-
-
-            //ShowConsoleOutput(ConvertDataSetToDatatable(ds));
-
-            return ds;
+            // Returns first datatable
+            return ds.Tables[0];
         }
 
-   
-
-
     }
-
 
 }

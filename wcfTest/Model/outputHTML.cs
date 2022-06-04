@@ -1,54 +1,10 @@
 ﻿using System.Data;
 
 
-
-/*******************************************************************************************************************\
-
-*                                                                                                                *
-
-\*******************************************************************************************************************/
 namespace Model
 {
     public class outputHTML
     {
-        public static void Main(string[] args)
-        { 
-            DataTable dt = dataSample();
-
-            string html = GetHtmlOutput(dt);
-            File.WriteAllText("mydzout.html", html);
-
-            Console.WriteLine();
-            Console.WriteLine("Enter any key to exit !");
-            Console.ReadKey();
-        }
-
-
-        public static DataTable dataSample()
-        {
-            DataTable dt = new DataTable();
-
-            dt.Columns.Add("First Name");
-            dt.Columns.Add("Last Name");
-            dt.Columns.Add("Email");
-            dt.Columns.Add("Age", typeof(int));
-
-            dt.Rows.Add("Gordon", "Simon", "gsimon@garnet.ca", 63);
-            dt.Rows.Add("Daniil", "Zlenko", "dzlenko0922@gmail.com", 18);
-            dt.Rows.Add("Bogdan", "Cerbulescu", "someemail@fghj.hjj", 35);
-
-            return dt;
-        }
-
-
-
-        /*******************************************************************************************************************\
-
-         *                                                                                                                 *
-
-        \*******************************************************************************************************************/
-
-
         public static string GetHtmlOutput(DataTable dt)
         {
             string html =
@@ -107,7 +63,6 @@ namespace Model
             "<tbody><tr>";
 
 
-
             foreach (DataRow row in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
@@ -115,7 +70,6 @@ namespace Model
                 html += "</tr>";
             }
             html += "</tbody>";
-
 
 
             html += "<tfoot><tr>";
@@ -126,27 +80,12 @@ namespace Model
             }
             html += "</tr></tfoot>";
 
-
-
-
             html += "</table> </body></html>";
-
-            File.WriteAllText("mydzout.html", html);
 
             return html;
         }
 
-
-
-
-
-
-
-
-
-
-
-
     }
+
 }
 
