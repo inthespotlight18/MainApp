@@ -55,7 +55,7 @@ namespace Model
             html += "<table id='result' class='display' ><thead><tr>";
             foreach (DataColumn col in dt.Columns)
             {
-                //Console.WriteLine(col.ColumnName);
+                Console.WriteLine(col.ColumnName + " COLUMN");
                 html += string.Format("<th>{0}</th> ", col.ColumnName);
             }
             html += "</tr></thead>";
@@ -66,10 +66,20 @@ namespace Model
             foreach (DataRow row in dt.Rows)
             {
                 foreach (DataColumn col in dt.Columns)
-                    html += string.Format("<td>{0}</td> ", row[col.ColumnName]);
+                {
+                    Console.WriteLine(row[col.ColumnName] + " ROW");
+                    html += string.Format("<td>{0}</td> ", row[col.ColumnName] );
+                }
+                    
                 html += "</tr>";
             }
             html += "</tbody>";
+
+            //foreach (DataColumn col in dt.Columns)
+            //    Console.WriteLine(col);
+
+            //foreach (DataRow row in dt.Rows)
+            //    Console.WriteLine(row);
 
 
             html += "<tfoot><tr>";

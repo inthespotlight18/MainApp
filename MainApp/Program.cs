@@ -21,8 +21,10 @@ namespace MainApp
         static void Main(string[] args)
         {
             string html;
-            string Path = @"\MainApp\MainApp\test.xlsx";
-            
+            string Path = @"Book2.xlsx";
+
+            Console.WriteLine($"Current directory is '{Environment.CurrentDirectory}'");
+
             Model.outputHTML mainLib = new Model.outputHTML();
             Model.excelData excelData = new Model.excelData();
             Model.sqlData sqlData = new Model.sqlData();
@@ -39,6 +41,7 @@ namespace MainApp
             Console.WriteLine();
             Console.WriteLine("Enter any key to exit !");
             Console.ReadKey();
+
         }
     }
 
