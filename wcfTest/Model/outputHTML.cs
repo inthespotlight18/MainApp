@@ -75,12 +75,6 @@ namespace Model
             }
             html += "</tbody>";
 
-            //foreach (DataColumn col in dt.Columns)
-            //    Console.WriteLine(col);
-
-            //foreach (DataRow row in dt.Rows)
-            //    Console.WriteLine(row);
-
 
             html += "<tfoot><tr>";
             foreach (DataColumn col in dt.Columns)
