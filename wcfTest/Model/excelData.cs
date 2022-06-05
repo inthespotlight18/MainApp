@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Data;
 using System.Data.OleDb;
 
@@ -46,16 +49,18 @@ namespace Model
         {
             DataSet ds = new DataSet();
 
-            string? connectionString = GetConnectionString(file);
+            string connectionString = GetConnectionString(file);
+
+            Console.WriteLine(connectionString + " ########");
 
             using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
-                OleDbCommand? cmd = new OleDbCommand();
+                OleDbCommand cmd = new OleDbCommand();
                 cmd.Connection = conn;
 
                 // Get all Sheets in Excel File
-                DataTable? dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                DataTable dtSheet = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
                 // Loop through all Sheets to get data
                 foreach (DataRow dr in dtSheet.Rows)

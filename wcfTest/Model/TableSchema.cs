@@ -16,9 +16,7 @@ namespace Model
                 Console.WriteLine("name[{0}] type[{1}] sz[{2}]", col.ColumnName, col.DataType, "sz");
             }
 
-
-
             return html;
-        }s
+        }
     }
 }
