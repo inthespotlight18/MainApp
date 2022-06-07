@@ -8,7 +8,7 @@ using Model;
                      DZ220530 - DataTransfer
 
                      Version : 1.2
-                     Release : June 3/2022
+                     Release : June 5/2022
                     
                      Re : Practice code for DLL                                                                     
                      Update : fixed bug for building
@@ -22,8 +22,6 @@ namespace MainApp
         {
             string html;
             string Path = @"Book2.xlsx";
-
-            Console.WriteLine($"Current directory is '{Environment.CurrentDirectory}'");
 
             Model.outputHTML mainLib = new Model.outputHTML();
             Model.excelData excelData = new Model.excelData();
