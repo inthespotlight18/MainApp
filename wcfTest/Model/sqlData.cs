@@ -22,13 +22,13 @@ namespace Model
 
         }
 
-        public static void CreationDT()
+        public static void CreationDT(string nameDT)
         {
-            string query = $"select * from dbo.C#table";
+            //string query = $"select * from dbo." + nameDT;
 
             SqlConnection myConn = new SqlConnection(@"Data Source=LAPTOP-R94KE44G\SQLEXPRESS;Initial Catalog=USERSDRAFT;Integrated Security=True");
 
-            string str = "CREATE TABLE C#table" +
+            string str = "CREATE TABLE " + nameDT +
             "(myId INTEGER CONSTRAINT PKeyMyId PRIMARY KEY," +
             "myName CHAR(50), myAddress CHAR(255), myBalance FLOAT)";
             
