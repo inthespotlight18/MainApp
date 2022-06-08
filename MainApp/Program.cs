@@ -63,7 +63,7 @@ namespace MainApp
             File.WriteAllText(dataTableName + "_Output.html", htmlNewSqlData);
 
 
-            string newDataTableName = "tete";
+            string newDataTableName = "test";
             sqlData.CreationDT(newDataTableName);
 
 
