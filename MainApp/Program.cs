@@ -20,21 +20,70 @@ namespace MainApp
     {
         static void Main(string[] args)
         {
-            string html;
+            string htmlExcelSchema;
+            string htmlExcelData;
+                     
+            string htmlSqlSchema;
+            string htmlSqlData;
+
+            string dataTableName = "someInfo";
+
             string Path = @"Book2.xlsx";
 
             Model.outputHTML mainLib = new Model.outputHTML();
             Model.excelData excelData = new Model.excelData();
             Model.sqlData sqlData = new Model.sqlData();
+            Model.TableSchema tableSchema = new Model.TableSchema();
 
 
             DataTable? dataTable_ExcelData = excelData.ExcelSheetGetDt(Path);
-            //DataTable? dataTable_Sql = sqlData.GetDbTableSql();
+            htmlExcelSchema = outputHTML.GetHtmlColumns(dataTable_ExcelData);
+            File.WriteAllText(Path + "_Schema.html", htmlExcelSchema);
 
-            html = outputHTML.GetHtmlOutput(dataTable_ExcelData);    //  - excel
-            //html = outputHTML.GetHtmlOutput(dataTable_Sql);         // - SqlServer
+            htmlExcelData = outputHTML.GetHtmlOutput(dataTable_ExcelData);
+            File.WriteAllText(Path + "_Output.html", htmlExcelData);
 
-            File.WriteAllText("mydzout.html", html);
+
+
+            DataTable? dataTable_Sql = sqlData.GetDbTableSql(dataTableName);
+            htmlSqlSchema = outputHTML.GetHtmlColumns(dataTable_Sql);
+            File.WriteAllText(dataTableName + "_Schema.html", htmlSqlSchema);
+
+            htmlSqlData = outputHTML.GetHtmlOutput(dataTable_Sql);
+            File.WriteAllText(dataTableName + "_Output.html", htmlSqlData);
+
+            dataTableName = "C#table";
+            string htmlNewSqlData;
+
+            DataTable? newDataTable_Sql = sqlData.GetDbTableSql(dataTableName);
+            htmlSqlSchema = outputHTML.GetHtmlColumns(newDataTable_Sql);
+            File.WriteAllText(dataTableName + "_Schema.html", htmlSqlSchema);
+
+            htmlNewSqlData = outputHTML.GetHtmlOutput(newDataTable_Sql);
+            File.WriteAllText(dataTableName + "_Output.html", htmlNewSqlData);
+
+
+
+
+            //sqlData.CreationDT();
+
+
+
+
+
+            // DataTable? dataTableSchema = tableSchema.TableSchemaToHtml();
+
+
+
+
+
+            //
+            //
+
+
+
+
+
 
             Console.WriteLine();
             Console.WriteLine("Enter any key to exit !");

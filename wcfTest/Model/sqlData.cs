@@ -6,10 +6,10 @@ namespace Model
 {
     public class sqlData
     {
-        public static DataTable GetDbTableSql()
+        public static DataTable GetDbTableSql(string DataTableName)
         {
             string connectionString = @"Data Source=LAPTOP-R94KE44G\SQLEXPRESS;Initial Catalog=USERSDRAFT;Integrated Security=True";
-            string sql = $"select * from dbo.someInfo";
+            string sql = $"select * from dbo."+DataTableName;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -19,6 +19,39 @@ namespace Model
                 adapter.Fill(ds);
                 return ds.Tables[0];              
             }
+
+        }
+
+        public static void CreationDT()
+        {
+            string query = $"select * from dbo.C#table";
+
+            SqlConnection myConn = new SqlConnection(@"Data Source=LAPTOP-R94KE44G\SQLEXPRESS;Initial Catalog=USERSDRAFT;Integrated Security=True");
+
+            string str = "CREATE TABLE C#table" +
+            "(myId INTEGER CONSTRAINT PKeyMyId PRIMARY KEY," +
+            "myName CHAR(50), myAddress CHAR(255), myBalance FLOAT)";
+            
+
+            SqlCommand myCommand = new SqlCommand(str, myConn);
+            try
+            {
+                myConn.Open();
+                myCommand.ExecuteNonQuery();
+                Console.WriteLine("DataBase is Created Successfully");
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString(), "MyProgram");
+            }
+            finally
+            {
+                if (myConn.State == ConnectionState.Open)
+                {
+                    myConn.Close();
+                }
+            }
+
 
         }
 
