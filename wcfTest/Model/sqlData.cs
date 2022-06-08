@@ -22,14 +22,18 @@ namespace Model
 
         }
 
-        public static void CreationDT(string nameDT)
+        public static void CreationDT(DataTable dt)
         {
             //string query = $"select * from dbo." + nameDT;
+            //dictionary colName=> 
+
+            //str.join() in right format
+            string nameDT = dt.TableName;
 
             SqlConnection myConn = new SqlConnection(@"Data Source=LAPTOP-R94KE44G\SQLEXPRESS;Initial Catalog=USERSDRAFT;Integrated Security=True");
 
             string str = "CREATE TABLE " + nameDT +
-            "(myId INTEGER CONSTRAINT PKeyMyId PRIMARY KEY," +
+            "(myId INTEGER CONSTRAINT KeyMyId PRIMARY KEY," +
             "myName CHAR(50), myAddress CHAR(255), myBalance FLOAT)";
             
 
@@ -51,6 +55,15 @@ namespace Model
                     myConn.Close();
                 }
             }
+            //DataTable dt = new DataTable(); 
+
+            //foreach (DataColumn col in dt.Columns)
+            //{
+            //    dt.Columns.Add("CustLName", typeof(String));
+            //    dt.Columns.Add("CustFName", typeof(String));
+            //    dt.Columns.Add("Purchases", typeof(Double));
+
+            //}
 
 
         }
