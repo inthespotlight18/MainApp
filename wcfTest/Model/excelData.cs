@@ -51,8 +51,6 @@ namespace Model
 
             string connectionString = GetConnectionString(file);
 
-            Console.WriteLine(connectionString + " ########");
-
             using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
