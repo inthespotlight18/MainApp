@@ -63,23 +63,8 @@ namespace MainApp
             File.WriteAllText(dataTableName + "_Output.html", htmlNewSqlData);
 
 
-
-
-            //sqlData.CreationDT();
-
-
-
-
-
-            // DataTable? dataTableSchema = tableSchema.TableSchemaToHtml();
-
-
-
-
-
-            //
-            //
-
+            string newDataTableName = "tete";
+            sqlData.CreationDT(newDataTableName);
 
 
 
